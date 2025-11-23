@@ -25,6 +25,7 @@ The `inference.py` script implements a vision-based control system that performs
 
 ## Usage
 
+
 ### Command Line Arguments
 The script accepts the following command line arguments:
 

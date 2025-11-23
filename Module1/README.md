@@ -25,6 +25,7 @@ The `inference.py` script implements a perception system that performs the follo
 
 ## Usage
 
+
 ### Command Line Arguments
 The script accepts the following command line arguments:
 

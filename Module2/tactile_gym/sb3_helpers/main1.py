@@ -8,7 +8,7 @@ import numpy as np
 
 import gym
 import sys
-sys.path.append("/home/yxw/桌面/Tactile_Map/tactile_gym-main")
+sys.path.append("###/tactile_gym-main")
 import matplotlib.pyplot as plt
 import cv2 
 import os

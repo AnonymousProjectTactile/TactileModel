@@ -9,7 +9,7 @@ I Love IU
 Copyright (c) 2024 by Chris Xiao yl.xiao@mail.utoronto.ca, All Rights Reserved. 
 '''
 import sys 
-sys.path.append('/home/yxw/桌面/Tactile_Map/Module3/CPD-Pytorch-main/')
+sys.path.append('###/Module3/CPD-Pytorch-main/')
 
 from functools import partial
 import matplotlib.pyplot as plt

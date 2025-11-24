@@ -10,7 +10,7 @@ from torchcpd import DeformableRegistration
 import numpy as np
 import torch as th
 
-path = '' # '/home/yxw/桌面/Tactile_Map/Module3/CPD_pytorch1/'
+path = '' # '###/Module3/CPD_pytorch1/'
 
 
 def visualize(iteration, error, X, Y, ax):

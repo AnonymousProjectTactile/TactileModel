@@ -1,7 +1,7 @@
 
 
 import sys 
-sys.path.append("/home/yxw/桌面/Tactile_Map/tactile_gym-main")
+sys.path.append("###/tactile_gym-main")
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

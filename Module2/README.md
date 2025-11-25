@@ -1,9 +1,10 @@
 # Active Exploration Module 
 
 ## Module Overview
+
 The active exploration module first utilizes fine-grained tactile input to stably follow target edges, and is then followed by internal sampling for detailed reconstruction.
 
-![Active Exploration Module](assets/module2.png)
+![Active Exploration Module](../assets/module2.png)
 
 
 ## Functionality
@@ -39,6 +40,10 @@ python inference.py --model_unet_path <path_to_unet_model> --policy_path <path_t
 ```
 
 ### Output
-The script outputs two action values (x, y) which represent movement coordinates based on the input image.
+The script outputs the actions which represent movement coordinates based on the current interactive state.
+
+
+
+
 
 

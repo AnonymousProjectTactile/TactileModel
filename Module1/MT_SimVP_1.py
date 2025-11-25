@@ -699,13 +699,12 @@ if __name__ == "__main__":
     args = parser.parse_args()
     args.DATA_PATH = 'Data/Skin/'
     # single task  
-    args.save_path = 'Out_1/MT_SimVP_New_2th' + \
+    args.save_path = 'models/MT_SimVP_New_2th' + \
         '_h'+str(args.task_hardness)[0] + '_' + str(args.weight_hardness) + \
         '_p'+str(args.task_prediction)[0] + '_' + str(args.weight_prediction) + \
         '_ph'+str(args.task_pred_hardness)[0] + '_' + str(args.weight_pred_hardness) +\
         '_d'+str(args.task_depth)[0] + '_' + str(args.weight_depth) + \
-        '_f'+str(args.task_force)[0] + '_' + str(args.weight_force) + \
-        '_pf'+str(args.task_pred_force)[0] + '_' + str(args.weight_pred_force) + '/' 
+        '_f'+str(args.task_force)[0] + '_' + str(args.weight_force) + '/' 
                                             
         
     args.load_path =  args.save_path         

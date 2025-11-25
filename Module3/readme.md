@@ -9,5 +9,6 @@ By bridging the gap between local touch and global sight, this component maps hi
 
 
 
+## Pseudo-Code of WOA: 
 ![alt text](../assets/image.png)
 

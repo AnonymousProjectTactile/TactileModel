@@ -435,7 +435,7 @@ def test():
         'PG_CPD': error_adap,
     }
     
-    with open('registration_results.pkl', 'wb') as f:
+    with open('Module3/registration_results.pkl', 'wb') as f:
         pickle.dump(results, f)
     
     return results

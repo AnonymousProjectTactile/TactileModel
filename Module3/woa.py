@@ -5,6 +5,7 @@ sys.path.append('Module3/')
 import os 
 import cv2 
 import glob
+import pickle
 import numpy as np 
 import open3d as o3d
 import matplotlib.pyplot as plt
@@ -13,19 +14,51 @@ from scipy.spatial import cKDTree
 from sklearn.neighbors import NearestNeighbors 
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
+from scipy.stats import friedmanchisquare, ttest_rel
+from scipy.stats import rankdata
 
 # from tools import * 
 from CPD.torchcpd.deformReg import * 
 
 
 data_path = 'Module3/Data/CPD_data/'
+
+
+
+def analyze_significance(results):
+    methods = list(results.keys())
+    metrics = ['CD_XY', 'CD_YX', 'HD', 'ARAP']
+    
+    compare_methods = ['ICP', 'CPD_0.1', 'CPD_1', 'CPD_10', 'CPD_20']
+    pg_cpd_scores = results['PG_CPD']  
+    
+    print("Statistical Significance (PG-CPD vs. others)")
+    print("=" * 60)
+    
+    for metric_idx, metric_name in enumerate(metrics):
+        print(f"\n--- {metric_name} ---")
+        pg_scores = pg_cpd_scores[:, metric_idx]
+        all_method_scores = []
+        method_names = []
+        for method in ['PG_CPD'] + compare_methods:
+            scores = results[method][:, metric_idx]
+            all_method_scores.append(scores)
+            method_names.append(method)
+        
+        for method in compare_methods:
+            other_scores = results[method][:, metric_idx]
+            t_stat, p_val = ttest_rel(pg_scores, other_scores)
+            
+            print(f"  PG-CPD vs {method:8}: t={t_stat:7.3f}, p={p_val:6.4f}, ")
+
+
    
 def chamfer_distance(X,Y_):
     tree_Y = cKDTree(Y_)
     tree_X = cKDTree(X)
     dist_XY, _ = tree_Y.query(X)
     dist_YX,_ = tree_X.query(Y_)
-    return np.mean(dist_XY**2), np.mean(dist_YX**2)
+    return np.mean(dist_YX**2), np.mean(dist_XY**2)
 
 
 def hausdorff_distance(X,Y_):
@@ -289,6 +322,7 @@ def test_Before():
     print(mean_CPD)
     print(std_CPD)
     print(1)
+    return np.array(errors)  
 
 def test_CPD_param(params):
     k,b = params
@@ -316,6 +350,7 @@ def test_CPD_param(params):
     print(mean_CPD)
     print(std_CPD)
     print(1)
+    return np.array(errors) 
 
 def test_ICP():
     data_list = os.listdir(data_path)
@@ -338,6 +373,7 @@ def test_ICP():
     print(mean_CPD)
     print(std_CPD)
     print(1)
+    return np.array(errors) 
 
 def test_CPD_fix(lam=0.1):
     # 0.1 
@@ -365,31 +401,54 @@ def test_CPD_fix(lam=0.1):
     print(mean_CPD)
     print(std_CPD)
     print(1)
+    return np.array(errors) 
 
 def test():
     print(' ====== Before ====== ')
-    test_Before()
+    error_before = test_Before()
 
     print(' ====== ICP ====== ')
-    test_ICP()
+    error_ICP = test_ICP()
 
     print(' ====== PG-CPD ====== ')
-    test_CPD_param([3.044 ,0.390])
+    error_adap = test_CPD_param([3.044 ,0.390])
 
     print(' ====== CPD 0.1 ====== ')
-    test_CPD_fix(0.1)
+    error_0_1 = test_CPD_fix(0.1)
 
     print(' ====== CPD 1 ====== ')
-    test_CPD_fix(1)
+    error_1 = test_CPD_fix(1)
 
     print(' ====== CPD 10 ====== ')
-    test_CPD_fix(10)
+    error_10 = test_CPD_fix(10)
 
     print(' ====== CPD 20 ====== ')
-    test_CPD_fix(20)
+    error_20 = test_CPD_fix(20)
+
+    results = {
+        'Before_Reg': error_before,
+        'ICP': error_ICP,
+        'CPD_0.1': error_0_1,
+        'CPD_1': error_1,
+        'CPD_10': error_10,
+        'CPD_20': error_20,
+        'PG_CPD': error_adap,
+    }
+    
+    with open('registration_results.pkl', 'wb') as f:
+        pickle.dump(results, f)
+    
+    return results
+
 
 
 test()
+
+
+with open('Module3/registration_results.pkl', 'rb') as f:
+    results = pickle.load(f)
+
+analyze_significance(results)
 
 
 

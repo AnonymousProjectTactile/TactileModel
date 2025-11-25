@@ -8,7 +8,13 @@ As shown in figure below, a Multi-task perception architecture is designed to pr
 
 
 
+## Usage
 
+
+### Running the Inference
+```bash
+python inference.py
+```
 
 
 

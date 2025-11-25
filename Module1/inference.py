@@ -113,10 +113,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     # Perception 
     parser.add_argument('--DEVICE', type=str, default= 'cuda')
-    parser.add_argument('--LR', type=float, default=1e-04, help='the iterator of val')
     parser.add_argument('--NUM_WORKS', type=int, default=12 )
     parser.add_argument('--seq_len', type=int, default = 8)  
-    parser.add_argument('--load_path', type=str, default= 'Module1/Out_1/MT_SimVP_New_2th_hT_1_pT_1_phT_1_dT_1_fT_1_pfT_1/checkpoints_140.pt')
+    parser.add_argument('--load_path', type=str, default= 'Module1/Out_1/MT_SimVP_New_2th_hT_1_pT_1_phT_1_dT_1_fT_1/checkpoints_140.pt')
     parser.add_argument('--task_hardness',      type=bool, default= True )   
     parser.add_argument('--task_depth',         type=bool, default= True ) 
     parser.add_argument('--task_force',         type=bool, default= True ) 

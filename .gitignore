@@ -1,9 +1,10 @@
 
 .gitignore
+
 Module1/Out_1/
 Module2/save_models/
-# Module3/Data
-Module1/models/
+Module3/Data
+
 git_add.txt
 
 model_files/

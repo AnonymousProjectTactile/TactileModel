@@ -26,7 +26,7 @@ modeling even in deformable scenarios.
 
 
 
-## Install
+<!-- ## Install
 
 ```
 # Clone the repository
@@ -41,7 +41,7 @@ conda activate TactileModel
 pip install -r requirements.txt
 
 
-```
+``` -->
 
 
 ## Project Structure 
